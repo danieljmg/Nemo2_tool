@@ -102,7 +102,6 @@ It must produce 54 different valid solutions.
 ## Authors
 
 1. **[Daniel-Jesus Munoz](https://github.com/danieljmg)**: [ITIS](https://www.uma.es/institutos-uma/info/118460/instituto-de-tecnologias-e-ingenieria-del-software/), [CAOSD](http://caosd.lcc.uma.es/), Dpt. LCC, Universidad de Málaga, Andalucía Tech, Spain
-2. **[Jeho Oh](https://github.com/jeho-oh)**: [Department of Computer Science](https://www.cs.utexas.edu/people) Austin, Texas, USA
 
 
 
