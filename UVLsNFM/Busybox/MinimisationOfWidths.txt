@@ -1,0 +1,43 @@
+FEATURE_VI_MAX_LEN
+range 2^8 to 2^14
+14-8 = 6 bits
+
+FEATURE_VI_UNDO_QUEUE_MAX
+range 2^5 to 2^16
+16-5 = 11 bits
+
+FEATURE_KILL_DELAY
+range 2^0* to 2^10
+10-0 = 10 bits
+
+LAST_ID
+range Unbounded
+10 bits
+
+FIRST_SYSTEM_ID
+range 0* to LAST_ID
+10 bits
+
+LAST_SYSTEM_ID
+range FIRST_SYSTEM_ID to LAST_ID
+10-0 = 10 bits
+
+FEATURE_BEEP_FREQ
+range 2^5* to 2^15
+15-5 = 10 bits
+
+FEATURE_BEEP_LENGTH_MS
+range 2^0* to 2^31*
+31-0 = 31 bits
+
+FEATURE_LESS_MAXLINES
+range 2^0* to 2^23*
+23-0 = 23 bits
+
+FEATURE_SYSLOGD_READ_BUFFER_SIZE
+range 2^8* to 2^14*
+14-8 = 6 bits
+
+FEATURE_IPC_SYSLOG_BUFFER_SIZE
+range 2^2* to 2^31*
+31-2 = 29 bits

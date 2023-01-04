@@ -1,0 +1,22 @@
+def API bool 0
+def TextureMemory bool 0
+def LocalMemory bool 0
+def OpenCL bool 0
+def CUDA bool 0
+def Linear1D bool 0
+def Linear2D bool 0
+def Ldg bool 0
+def Array2D bool 0
+def Blocksize [:21]
+def Padding [:16]
+def PixelPerThread [:3]
+ct OpenCL -> API
+ct CUDA -> API
+ct Linear1D -> TextureMemory
+ct Linear2D -> TextureMemory
+ct Ldg -> TextureMemory
+ct Array2D -> TextureMemory
+ct OpenCL -> And(Not(Linear1D), Not(Linear2D), Not(Ldg))
+ct Array2D -> (Padding == 0)
+ct And(Or(Blocksize == 5, Blocksize == 10, Blocksize == 14, Blocksize == 17, Blocksize == 19), Or(PixelPerThread==2, PixelPerThread==3)) -> (Not(LocalMemory))
+ct And(Blocksize == 20, Or(PixelPerThread== 1, PixelPerThread== 2, PixelPerThread== 3 )) -> (Not(LocalMemory))

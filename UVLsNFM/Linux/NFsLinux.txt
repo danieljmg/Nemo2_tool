@@ -1,0 +1,606 @@
+#55 in total
+#INFO https://cateee.net
+
+INIT_ENV_ARG_LIMIT=32
+    prompt:
+    type: int
+    defined in init/Kconfig
+    found in Linux kernels: 2.6.12–2.6.39, 3.0–3.19, 4.0–4.20, 5.0–5.19, 6.0, 6.1-rc+HEAD
+
+Help text
+
+Maximum of each of the number of arguments and environment variables passed to init from the kernel command line.
+-
+
+RCU_FANOUT=32
+       prompt: Tree-based hierarchical RCU fanout value
+    type: int
+    depends on: ( TREE_RCU && RCU_EXPERT )
+    defined in kernel/rcu/Kconfig
+    found in Linux kernels: 4.13–4.20, 5.0–5.19, 6.0, 6.1-rc+HEAD
+
+Help text
+
+This option controls the fanout of hierarchical implementations of RCU, allowing RCU to work efficiently on machines with large numbers of CPUs. This value must be at least the fourth root of NR_CPUS, which allows NR_CPUS to be insanely large. The default value of RCU_FANOUT should be used for production systems, but if you are stress-testing the RCU implementation itself, small RCU_FANOUT values allow you to test large-system code paths on small(er) systems.
+
+Select a specific number if testing RCU itself. Take the default if unsure.
+-
+
+LOG_BUF_SHIFT=17
+    prompt: Kernel log buffer size (16 => 64KB, 17 => 128KB)
+    type: int
+    depends on: PRINTK
+    defined in init/Kconfig
+    found in Linux kernels: 2.5.75, 2.6.0–2.6.11, 2.6.22–2.6.39, 3.0–3.19, 4.0–4.20, 5.0–5.19, 6.0, 6.1-rc+HEAD
+
+Help text
+
+Select the minimal kernel log buffer size as a power of 2. The final size is affected by LOG_CPU_MAX_BUF_SHIFT config parameter, see below. Any higher size also might be forced by "log_buf_len" boot parameter.
+
+Examples: 17 => 128 KB 16 => 64 KB 15 => 32 KB 14 => 16 KB 13 => 8 KB 12 => 4 KB
+-
+
+BASE_SMALL=0
+type: int
+defined in init/Kconfig
+found in Linux kernels: 2.6.12–2.6.39, 3.0–3.19, 4.0–4.20, 5.0–5.19, 6.0, 6.1-rc+HEAD
+-
+
+X86_INTERNODE_CACHE_SHIFT=6
+type: int
+depends on: X86_VSMP
+defined in arch/x86/Kconfig.cpu
+found in Linux kernels: 2.6.33–2.6.39, 3.0–3.19, 4.0–4.20, 5.0–5.19, 6.0, 6.1-rc+HEAD
+-
+
+X86_L1_CACHE_SHIFT=6
+type: int
+depends on: ( MPENTIUM4 || MPSC ) && ( MK7 || MK8 || MPENTIUMM || MCORE2 || MATOM || MVIAC7 || X86_GENERIC || GENERIC_CPU ) && ( MELAN || M486SX || M486 || MGEODEGX1 ) && ( MWINCHIP3D || MWINCHIPC6 || MCRUSOE || MEFFICEON || MCYRIXIII || MK6 || MPENTIUMIII || MPENTIUMII || M686 || M586MMX || M586TSC || M586 || MVIAC3_2 || MGEODE_LX )
+defined in arch/x86/Kconfig.cpu
+found in Linux kernels: 2.6.24–2.6.39, 3.0–3.19, 4.0–4.20, 5.0–5.19, 6.0, 6.1-rc+HEAD
+-
+
+X86_MINIMUM_CPU_FAMILY=64
+type: int
+depends on: ( X86_64 ) && ( X86_32 && ( MPENTIUM4 || MPENTIUMM || MPENTIUMIII || MPENTIUMII || M686 || MVIAC3_2 || MVIAC7 || MEFFICEON || MATOM || MCRUSOE || MCORE2 || MK7 || MK8 )) && ( X86_32 && X86_CMPXCHG64 )
+defined in arch/x86/Kconfig.cpu
+found in Linux kernels: 2.6.24–2.6.39, 3.0–3.19, 4.0–4.20, 5.0–5.19, 6.0, 6.1-rc+HEAD
+-
+
+NR_CPUS=16
+type: int
+depends on: PPC64
+defined in arch/powerpc/platforms/Kconfig.cputype
+found in Linux kernels: 2.6.31–2.6.39, 3.0–3.19, 4.0–4.20, 5.0–5.19, 6.0, 6.1-rc+HEAD
+-
+
+SPLIT_PTLOCK_CPUS=4
+type: int
+depends on: (! MMU ) && ( ARM && ! CPU_CACHE_VIPT ) && ( PARISC && ! PA20 ) && ( SPARC32 )
+defined in mm/Kconfig
+found in Linux kernels: 2.6.15–2.6.39, 3.0–3.19, 4.0–4.20, 5.0–5.19, 6.0, 6.1-rc+HEAD
+-
+
+ZONE_DMA_FLAG=1
+type: int
+depends on: ! ZONE_DMA
+defined in mm/Kconfig
+found in Linux kernels: 2.6.21–2.6.39, 3.0–3.19, 4.0–4.6
+-
+
+DEFAULT_MMAP_MIN_ADDR=4096
+    type: int
+    depends on: MMU
+    defined in mm/Kconfig
+    found in Linux kernels: 2.6.31–2.6.39, 3.0–3.19, 4.0–4.20, 5.0–5.19, 6.0, 6.1-rc+HEAD
+
+Help text
+
+This is the portion of low virtual memory which should be protected from userspace allocation. Keeping a user from writing to low pages can help reduce the impact of kernel NULL pointer bugs.
+
+For most ia64, ppc64 and x86 users with lots of address space a value of 65536 is reasonable and should cause no problems. On arm and other archs it should not be higher than 32768. Programs which use vm86 functionality or have some need to map this low address space will need CAP_SYS_RAWIO or disable this protection by setting the value to 0.
+-
+
+MTRR_SANITIZER_ENABLE_DEFAULT=0
+
+    prompt: MTRR cleanup enable value (0-1)
+    type: int
+    depends on: MTRR_SANITIZER
+    defined in arch/x86/Kconfig
+    found in Linux kernels: 2.6.27–2.6.39, 3.0–3.19, 4.0–4.20, 5.0–5.19, 6.0, 6.1-rc+HEAD
+-
+
+MTRR_SANITIZER_SPARE_REG_NR_DEFAULT=1
+value (0-1)
+-
+
+HZ=300
+prompt: Timer Frequency
+type: int
+depends on: ( HZ_100 ) && ( HZ_250 ) && ( HZ_300 ) && ( HZ_1000 )
+-
+
+ACPI_BLACKLIST_YEAR=0
+    prompt: Disable ACPI for systems before Jan 1st this year
+    type: int
+    depends on: X86_32
+    defined in drivers/acpi/Kconfig
+    found in Linux kernels: 2.6.9–2.6.39, 3.0–3.12
+-
+
+WIMAX_DEBUG_LEVEL=8
+depends on: WIMAX
+-
+
+MTD_PHYSMAP_LEN=0
+    rompt: Physical length of flash mapping
+    type: hex
+    depends on: MTD_PHYSMAP_COMPAT
+    defined in drivers/mtd/maps/Kconfig
+    found in Linux kernels: 2.5.45–2.5.75, 2.6.0–2.6.39, 3.0–3.19, 4.0–4.20, 5.0–5.19, 6.0, 6.1-rc+HEAD
+
+Help text
+
+This is the total length of the mapping of the flash chips on your particular board. If there is space, or aliases, in the physical memory map between the chips, this could be larger than the total amount of flash present. Refer to the memory map which should hopefully be in the documentation for your board.
+-
+
+MTD_PHYSMAP_BANKWIDTH=2
+    prompt: Bank width in octets
+    type: int
+    depends on: MTD_PHYSMAP_COMPAT
+    defined in drivers/mtd/maps/Kconfig
+    found in Linux kernels: 2.6.8–2.6.39, 3.0–3.19, 4.0–4.20, 5.0–5.19, 6.0, 6.1-rc+HEAD
+
+Help text
+
+This is the total width of the data bus of the flash devices in octets. For example, if you have a data bus width of 32 bits, you would set the bus width octet value to 4. This is used internally by the CFI drivers.
+-
+
+MTDRAM_TOTAL_SIZE=4096
+    prompt: MTDRAM device size in KiB
+    type: int
+    depends on: MTD_MTDRAM
+    defined in drivers/mtd/devices/Kconfig
+    found in Linux kernels: 2.5.45–2.5.75, 2.6.0–2.6.39, 3.0–3.19, 4.0–4.20, 5.0–5.19, 6.0, 6.1-rc+HEAD
+
+Help text
+
+This allows you to configure the total size of the MTD device emulated by the MTDRAM driver. If the MTDRAM driver is built as a module, it is also possible to specify this as a parameter when loading the module.
+-
+
+MTDRAM_ERASE_SIZE=128
+    prompt: MTDRAM erase block size in KiB
+    type: int
+    depends on: MTD_MTDRAM
+    defined in drivers/mtd/devices/Kconfig
+    found in Linux kernels: 2.5.45–2.5.75, 2.6.0–2.6.39, 3.0–3.19, 4.0–4.20, 5.0–5.19, 6.0, 6.1-rc+HEAD
+
+Help text
+
+This allows you to configure the size of the erase blocks in the device emulated by the MTDRAM driver. If the MTDRAM driver is built as a module, it is also possible to specify this as a parameter when loading the module.
+-
+
+MTD_NAND_DISKONCHIP_PROBE_ADDRESS=0
+    prompt: Physical address of DiskOnChip
+    type: hex
+    depends on: ( MTD_NAND_DISKONCHIP_PROBE_ADVANCED ) && ( MTD_NAND_DISKONCHIP )
+    defined in drivers/mtd/nand/Kconfig
+    found in Linux kernels: 2.6.8–2.6.39, 3.0–3.19, 4.0–4.16
+
+Help text
+
+By default, the probe for DiskOnChip devices will look for a DiskOnChip at every multiple of 0x2000 between 0xC8000 and 0xEE000. This option allows you to specify a single address at which to probe for the device, which is useful if you have other devices in that range which get upset when they are probed.
+
+(Note that on PowerPC, the normal probe will only check at 0xE4000000.)
+
+Normally, you should leave this set to zero, to allow the probe at the normal addresses.
+-
+
+MTD_UBI_WL_THRESHOLD=4096
+    prompt: UBI wear-leveling threshold
+    type: int
+    depends on: (none)
+    defined in drivers/mtd/ubi/Kconfig
+    found in Linux kernels: 2.6.22–2.6.39, 3.0–3.19, 4.0–4.20, 5.0–5.19, 6.0, 6.1-rc+HEAD
+
+Help text
+
+This parameter defines the maximum difference between the highest erase counter value and the lowest erase counter value of eraseblocks of UBI devices. When this threshold is exceeded, UBI starts performing wear leveling by means of moving data from eraseblock with low erase counter to eraseblocks with high erase counter.
+
+The default value should be OK for SLC NAND flashes, NOR flashes and other flashes which have eraseblock life-cycle 100000 or more. However, in case of MLC NAND flashes which typically have eraseblock life-cycle less than 10000, the threshold should be lessened (e.g., to 128 or 256, although it does not have to be power of 2).
+-
+
+MTD_UBI_BEB_RESERVE=1
+    prompt: Percentage of reserved eraseblocks for bad eraseblocks handling
+    type: int
+    depends on: (none)
+    defined in drivers/mtd/ubi/Kconfig
+    found in Linux kernels: 2.6.22–2.6.39, 3.0–3.6
+
+Help text
+
+If the MTD device admits of bad eraseblocks (e.g. NAND flash), UBI reserves some amount of physical eraseblocks to handle new bad eraseblocks. For example, if a flash physical eraseblock becomes bad, UBI uses these reserved physical eraseblocks to relocate the bad one. This option specifies how many physical eraseblocks will be reserved for bad eraseblock handling (percents of total number of good flash eraseblocks). If the underlying flash does not admit of bad eraseblocks (e.g. NOR flash), this value is ignored and nothing is reserved. Leave the default value if unsure.
+-
+
+BLK_DEV_RAM_COUNT=8
+    prompt: Default number of RAM disks
+    type: int
+    depends on: BLK_DEV_RAM
+    defined in drivers/block/Kconfig
+    found in Linux kernels: 2.6.10–2.6.39, 3.0–3.19, 4.0–4.20, 5.0–5.19, 6.0, 6.1-rc+HEAD
+
+Help text
+
+The default value is 16 RAM disks. Change this if you know what you are doing. If you boot from a filesystem that needs to be extracted in memory, you will need at least one RAM disk (e.g. root on cramfs).
+-
+
+BLK_DEV_RAM_SIZE=8192
+    prompt: Default RAM disk size (kbytes)
+    type: int
+    depends on: BLK_DEV_RAM
+    defined in drivers/block/Kconfig
+    found in Linux kernels: 2.6.7–2.6.39, 3.0–3.19, 4.0–4.20, 5.0–5.19, 6.0, 6.1-rc+HEAD
+
+Help text
+
+The default value is 4096 kilobytes. Only change this if you know what you are doing.
+-
+
+CDROM_PKTCDVD_BUFFERS=8
+    prompt: Free buffers for data gathering
+    type: int
+    depends on: CDROM_PKTCDVD
+    defined in drivers/block/Kconfig
+    found in Linux kernels: 2.6.10–2.6.39, 3.0–3.19, 4.0–4.20, 5.0–5.19, 6.0, 6.1-rc+HEAD
+
+Help text
+
+This controls the maximum number of active concurrent packets. More concurrent packets can increase write performance, but also require more memory. Each concurrent packet will require approximately 64Kb of non-swappable kernel memory, memory which will be allocated when a disc is opened for writing.
+-
+
+AIC7XXX_CMDS_PER_DEVICE=32
+    prompt: Maximum number of TCQ commands per device
+    type: int
+    depends on: SCSI_AIC7XXX
+    defined in drivers/scsi/aic7xxx/Kconfig.aic7xxx
+    found in Linux kernels: 2.5.53–2.5.75, 2.6.0–2.6.39, 3.0–3.19, 4.0–4.20, 5.0–5.19, 6.0, 6.1-rc+HEAD
+
+Help text
+
+Specify the number of commands you would like to allocate per SCSI device when Tagged Command Queueing (TCQ) is enabled on that device.
+
+This is an upper bound value for the number of tagged transactions to be used for any device. The aic7xxx driver will automatically vary this number based on device behavior. For devices with a fixed maximum, the driver will eventually lock to this maximum and display a console message indicating this value.
+
+Due to resource allocation issues in the Linux SCSI mid-layer, using a high number of commands per device may result in memory allocation failures when many devices are attached to the system. For this reason, the default is set to 32. Higher values may result in higher performance on some devices. The upper bound is 253. 0 disables tagged queueing.
+
+Per device tag depth can be controlled via the kernel command line "tag_info" option. See Documentation/scsi/aic7xxx.rst for details.
+-
+
+AIC7XXX_RESET_DELAY_MS=5000
+    prompt: Initial bus reset delay in milli-seconds
+    type: int
+    depends on: SCSI_AIC79XX
+    defined in drivers/scsi/aic7xxx/Kconfig.aic79xx
+    found in Linux kernels: 2.5.53–2.5.75, 2.6.0–2.6.39, 3.0–3.19, 4.0–4.20, 5.0–5.19, 6.0, 6.1-rc+HEAD
+
+Help text
+
+The number of milliseconds to delay after an initial bus reset. The bus settle delay following all error recovery actions is dictated by the SCSI layer and is not affected by this value.
+
+Default: 5000 (5 seconds)
+-
+
+AIC7XXX_DEBUG_MASK=0
+    prompt: Debug code enable mask (2047 for all debugging)
+    type: int
+    depends on: SCSI_AIC7XXX
+    defined in drivers/scsi/aic7xxx/Kconfig.aic7xxx
+    found in Linux kernels: 2.5.53–2.5.75, 2.6.0–2.6.39, 3.0–3.19, 4.0–4.20, 5.0–5.19, 6.0, 6.1-rc+HEAD
+
+Help text
+
+Bit mask of debug options that is only valid if the AIC7XXX_DEBUG_ENABLE option is enabled. The bits in this mask are defined in the drivers/scsi/aic7xxx/aic7xxx.h - search for the variable ahc_debug in that file to find them.
+-
+
+AIC79XX_CMDS_PER_DEVICE=32
+    prompt: Maximum number of TCQ commands per device
+    type: int
+    depends on: SCSI_AIC79XX
+    defined in drivers/scsi/aic7xxx/Kconfig.aic79xx
+    found in Linux kernels: 2.5.53–2.5.75, 2.6.0–2.6.39, 3.0–3.19, 4.0–4.20, 5.0–5.19, 6.0, 6.1-rc+HEAD
+
+Help text
+
+Specify the number of commands you would like to allocate per SCSI device when Tagged Command Queueing (TCQ) is enabled on that device.
+
+This is an upper bound value for the number of tagged transactions to be used for any device. The aic7xxx driver will automatically vary this number based on device behavior. For devices with a fixed maximum, the driver will eventually lock to this maximum and display a console message indicating this value.
+
+Due to resource allocation issues in the Linux SCSI mid-layer, using a high number of commands per device may result in memory allocation failures when many devices are attached to the system. For this reason, the default is set to 32. Higher values may result in higher performance on some devices. The upper bound is 253. 0 disables tagged queueing.
+
+Per device tag depth can be controlled via the kernel command line "tag_info" option. See Documentation/scsi/aic79xx.rst for details.
+-
+
+AIC79XX_RESET_DELAY_MS=5000
+    prompt: Initial bus reset delay in milli-seconds
+    type: int
+    depends on: SCSI_AIC79XX
+    defined in drivers/scsi/aic7xxx/Kconfig.aic79xx
+    found in Linux kernels: 2.5.53–2.5.75, 2.6.0–2.6.39, 3.0–3.19, 4.0–4.20, 5.0–5.19, 6.0, 6.1-rc+HEAD
+
+Help text
+
+The number of milliseconds to delay after an initial bus reset. The bus settle delay following all error recovery actions is dictated by the SCSI layer and is not affected by this value.
+
+Default: 5000 (5 seconds)
+-
+
+AIC79XX_DEBUG_MASK=0
+    prompt: Debug code enable mask (16383 for all debugging)
+    type: int
+    depends on: SCSI_AIC79XX
+    defined in drivers/scsi/aic7xxx/Kconfig.aic79xx
+    found in Linux kernels: 2.5.53–2.5.75, 2.6.0–2.6.39, 3.0–3.19, 4.0–4.20, 5.0–5.19, 6.0, 6.1-rc+HEAD
+
+Help text
+
+Bit mask of debug options that is only valid if the AIC79XX_DEBUG_ENABLE option is enabled. The bits in this mask are defined in the drivers/scsi/aic7xxx/aic79xx.h - search for the variable ahd_debug in that file to find them.
+-
+
+SCSI_MPT2SAS_MAX_SGE=128
+    prompt: LSI MPT Fusion Max number of SG Entries (16 - 128)
+    type: int
+    depends on: PCI && SCSI && SCSI_MPT2SAS
+    defined in drivers/scsi/mpt2sas/Kconfig
+    found in Linux kernels: 2.6.30–2.6.39, 3.0–3.19, 4.0–4.3
+
+Help text
+
+This option allows you to specify the maximum number of scatter- gather entries per I/O. The driver default is 128, which matches SAFE_PHYS_SEGMENTS. However, it may decreased down to 16. Decreasing this parameter will reduce memory requirements on a per controller instance.
+-
+
+SCSI_EATA_MAX_TAGS=16
+    prompt: maximum number of queued commands
+    type: int
+    depends on: SCSI_EATA
+    defined in drivers/scsi/Kconfig
+    found in Linux kernels: 2.5.45–2.5.75, 2.6.0–2.6.39, 3.0–3.19, 4.0–4.16
+
+Help text
+
+This specifies how many SCSI commands can be maximally queued for each probed SCSI device. You should reduce the default value of 16 only if you have disks with buggy or limited tagged command support. Minimum is 2 and maximum is 62. This value is also the window size used by the elevator sorting option above. The effective value used by the driver for each probed SCSI device is reported at boot time. This is equivalent to the "eata=mq:8" boot option.
+-
+
+SCSI_SYM53C8XX_DMA_ADDRESSING_MODE=1
+    prompt: DMA addressing mode
+    type: int
+    depends on: SCSI_SYM53C8XX_2
+    defined in drivers/scsi/Kconfig
+    found in Linux kernels: 2.5.45–2.5.75, 2.6.0–2.6.39, 3.0–3.19, 4.0–4.20, 5.0–5.19, 6.0, 6.1-rc+HEAD
+
+Help text
+
+This option only applies to PCI-SCSI chips that are PCI DAC capable (875A, 895A, 896, 1010-33, 1010-66, 1000).
+
+When set to 0, the driver will program the chip to only perform 32-bit DMA. When set to 1, the chip will be able to perform DMA to addresses up to 1TB. When set to 2, the driver supports the full 64-bit DMA address range, but can only address 16 segments of 4 GB each. This limits the total addressable range to 64 GB.
+
+Most machines with less than 4GB of memory should use a setting of 0 for best performance. If your machine has 4GB of memory or more, you should set this option to 1 (the default).
+
+The still experimental value 2 (64 bit DMA addressing with 16 x 4GB segments limitation) can be used on systems that require PCI address bits past bit 39 to be set for the addressing of memory using PCI DAC cycles.
+-
+
+SCSI_SYM53C8XX_DEFAULT_TAGS=16
+    prompt: Default tagged command queue depth
+    type: int
+    depends on: SCSI_SYM53C8XX_2
+    defined in drivers/scsi/Kconfig
+    found in Linux kernels: 2.6.17–2.6.39, 3.0–3.19, 4.0–4.20, 5.0–5.19, 6.0, 6.1-rc+HEAD
+
+Help text
+
+This is the default value of the command queue depth the driver will announce to the generic SCSI layer for devices that support tagged command queueing. This value can be changed from the boot command line. This is a soft limit that cannot exceed SCSI_SYM53C8XX_MAX_TAGS.
+-
+
+SCSI_SYM53C8XX_MAX_TAGS=64
+    prompt: Maximum number of queued commands
+    type: int
+    depends on: SCSI_SYM53C8XX_2
+    defined in drivers/scsi/Kconfig
+    found in Linux kernels: 2.6.17–2.6.39, 3.0–3.19, 4.0–4.20, 5.0–5.19, 6.0, 6.1-rc+HEAD
+
+Help text
+
+This option allows you to specify the maximum number of commands that can be queued to any device, when tagged command queuing is possible. The driver supports up to 256 queued commands per device. This value is used as a compiled-in hard limit.
+-
+
+DE2104X_DSL=0
+    prompt: Descriptor Skip Length in 32 bit longwords
+    type: int
+    depends on: DE2104X
+    defined in drivers/net/tulip/Kconfig
+    found in Linux kernels: 2.6.31–2.6.39, 3.0–3.1
+
+Help text
+
+Setting this value allows to align ring buffer descriptors into their own cache lines. Value of 4 corresponds to the typical 32 byte line (the descriptor is 16 bytes). This is necessary on systems that lack cache coherence, an example is PowerMac 5500. Otherwise 0 is safe. Default is 0, and range is 0 to 31.
+-
+
+WIMAX_I2400M_DEBUG_LEVEL=8
+    prompt: WiMAX i2400m debug level
+    type: int
+    depends on: WIMAX_I2400M
+    defined in drivers/net/wimax/i2400m/Kconfig
+    found in Linux kernels: 2.6.29–2.6.39, 3.0–3.19, 4.0–4.20, 5.0–5.10
+
+Help text
+
+Select the maximum debug verbosity level to be compiled into the WiMAX i2400m driver code.
+
+By default, this is disabled at runtime and can be selectively enabled at runtime for different parts of the code using the sysfs debug-levels file.
+
+If set at zero, this will compile out all the debug code.
+
+It is recommended that it is left at 8.
+-
+
+INPUT_MOUSEDEV_SCREEN_X=1024
+    prompt: Horizontal screen resolution
+    type: int
+    depends on: INPUT_MOUSEDEV
+    defined in drivers/input/Kconfig
+    found in Linux kernels: 2.5.45–2.5.75, 2.6.0–2.6.39, 3.0–3.19, 4.0–4.20, 5.0–5.19, 6.0, 6.1-rc+HEAD
+
+Help text
+
+If you're using a digitizer, or a graphic tablet, and want to use it as a mouse then the mousedev driver needs to know the X window screen resolution you are using to correctly scale the data. If you're not using a digitizer, this value is ignored.
+-
+
+INPUT_MOUSEDEV_SCREEN_Y=768
+    prompt: Vertical screen resolution
+    type: int
+    depends on: INPUT_MOUSEDEV
+    defined in drivers/input/Kconfig
+    found in Linux kernels: 2.5.45–2.5.75, 2.6.0–2.6.39, 3.0–3.19, 4.0–4.20, 5.0–5.19, 6.0, 6.1-rc+HEAD
+
+Help text
+
+If you're using a digitizer, or a graphic tablet, and want to use it as a mouse then the mousedev driver needs to know the X window screen resolution you are using to correctly scale the data. If you're not using a digitizer, this value is ignored.
+-
+
+SERIAL_8250_NR_UARTS=4
+    prompt: Maximum number of 8250/16550 serial ports
+    type: int
+    depends on: SERIAL_8250
+    defined in drivers/serial/Kconfig
+    found in Linux kernels: 2.6.13–2.6.37
+
+Help text
+
+Set this to the number of serial ports you want the driver to support. This includes any ports discovered via ACPI or PCI enumeration and any ports that may be added at run-time via hot-plug, or any ISA multi-port serial cards.
+-
+
+SERIAL_8250_RUNTIME_UARTS=4
+    prompt: Number of 8250/16550 serial ports to register at runtime
+    type: int
+    depends on: SERIAL_8250
+    defined in drivers/serial/Kconfig
+    found in Linux kernels: 2.6.16–2.6.37
+
+Help text
+
+Set this to the maximum number of serial ports you want the kernel to register at boot time. This can be overridden with the module parameter "nr_uarts", or boot-time parameter 8250.nr_uarts
+-
+
+DVB_MAX_ADAPTERS=8
+    prompt: maximum number of DVB/ATSC adapters
+    type: int
+    depends on: DVB_CORE
+    defined in drivers/media/dvb/Kconfig
+    found in Linux kernels: 2.6.32–2.6.39, 3.0–3.6
+
+Help text
+
+Maximum number of DVB/ATSC adapters. Increasing this number increases the memory consumption of the DVB subsystem even if a much lower number of DVB/ATSC adapters is present. Only values in the range 4-32 are tested.
+
+If you are unsure about this, use the default value 8
+-
+
+SND_AC97_POWER_SAVE_DEFAULT=5
+    prompt: Default time-out for AC97 power-save mode
+    type: int
+    depends on: SND_AC97_POWER_SAVE
+    defined in sound/drivers/Kconfig
+    found in Linux kernels: 2.6.27–2.6.39, 3.0–3.19, 4.0–4.20, 5.0–5.19, 6.0, 6.1-rc+HEAD
+
+Help text
+
+The default time-out value in seconds for AC97 automatic power-save mode. 0 means to disable the power-save mode.
+
+See SND_AC97_POWER_SAVE for more details.
+-
+
+SND_HDA_POWER_SAVE_DEFAULT=5
+    prompt: Default time-out for HD-audio power-save mode
+    type: int
+    depends on: PM
+    defined in sound/pci/hda/Kconfig
+    found in Linux kernels: 2.6.29–2.6.39, 3.0–3.19, 4.0–4.20, 5.0–5.19, 6.0, 6.1-rc+HEAD
+
+Help text
+
+The default time-out value in seconds for HD-audio automatic power-save mode. 0 means to disable the power-save mode.
+-
+
+FAT_DEFAULT_CODEPAGE=437
+    prompt: Default codepage for FAT
+    type: int
+    depends on: FAT_FS
+    defined in fs/fat/Kconfig
+    found in Linux kernels: 2.6.29–2.6.39, 3.0–3.19, 4.0–4.20, 5.0–5.19, 6.0, 6.1-rc+HEAD
+
+Help text
+
+This option should be set to the codepage of your FAT filesystems. It can be overridden with the "codepage" mount option. See Documentation/filesystems/vfat.rst for more information.
+-
+
+JFFS2_FS_DEBUG=0
+    prompt: JFFS2 debugging verbosity (0 = quiet, 2 = noisy)
+    type: int
+    depends on: JFFS2_FS
+    defined in fs/jffs2/Kconfig
+    found in Linux kernels: 2.6.28–2.6.39, 3.0–3.19, 4.0–4.20, 5.0–5.19, 6.0, 6.1-rc+HEAD
+
+Help text
+
+This controls the amount of debugging messages produced by the JFFS2 code. Set it to zero for use in production systems. For evaluation, testing and debugging, it's advisable to set it to one. This will enable a few assertions and will print debugging messages at the KERN_DEBUG loglevel, where they won't normally be visible. Level 2 is unlikely to be useful - it enables extra debugging in certain areas which at one point needed debugging, but when the bugs were located and fixed, the detailed messages were relegated to level 2.
+
+If reporting bugs, please try to have available a full dump of the messages at debug level 1 while the misbehaviour was occurring.
+-
+
+SQUASHFS_FRAGMENT_CACHE_SIZE=3
+    prompt: Number of fragments cached
+    type: int
+    depends on: ( SQUASHFS_EMBEDDED ) && ( SQUASHFS )
+    defined in fs/squashfs/Kconfig
+    found in Linux kernels: 2.6.29–2.6.39, 3.0–3.19, 4.0–4.20, 5.0–5.19, 6.0, 6.1-rc+HEAD
+
+Help text
+
+By default SquashFS caches the last 3 fragments read from the filesystem. Increasing this amount may mean SquashFS has to re-read fragments less often from disk, at the expense of extra system memory. Decreasing this amount will mean SquashFS uses less memory at the expense of extra reads from disk.
+
+Note there must be at least one cached fragment. Anything much more than three will probably not make much difference.
+-
+
+FRAME_WARN=1024
+    prompt: Warn for stack frames larger than
+    type: int
+    depends on: ( GCC_PLUGIN_LATENT_ENTROPY ) && ( PARISC ) && ((! 64BIT && XTENSA )) && (! 64BIT ) && ( 64BIT )
+    defined in lib/Kconfig.debug
+    found in Linux kernels: 5.7–5.19, 6.0, 6.1-rc+HEAD
+
+Help text
+
+Tell gcc to warn at build time for stack frames larger than this. Setting this too low will cause a lot of warnings. Setting it to 0 disables the warning.
+-
+
+IO_DELAY_TYPE_0X80=0
+type: int
+depends on: (none)
+defined in arch/x86/Kconfig.debug
+found in Linux kernels: 2.6.25–2.6.39, 3.0–3.19, 4.0–4.20, 5.0–5.2
+-
+
+IO_DELAY_TYPE_0XED=1
+Same
+-
+
+IO_DELAY_TYPE_UDELAY=2
+Same
+-
+
+IO_DELAY_TYPE_NONE=3
+same
+-
+
+DEFAULT_IO_DELAY_TYPE=0
+same
+-

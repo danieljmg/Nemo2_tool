@@ -1,0 +1,108 @@
+config GZIP_FAST
+	int "Trade memory for speed (0:small,slow - 2:fast,big)"
+	default 0
+	range 0 2
+	depends on GZIP
+	help
+	Enable big memory options for gzip.
+	0: small buffers, small hash-tables
+	1: larger buffers, larger hash-tables
+	2: larger buffers, largest hash-tables
+	Larger models may give slightly better compression
+
+config FEATURE_VI_MAX_LEN
+	int "Maximum screen width"
+	range 256 16384
+	default 4096
+	depends on VI
+	help
+	Contrary to what you may think, this is not eating much.
+	Make it smaller than 4k only if you are very limited on memory.
+
+config FEATURE_VI_UNDO_QUEUE_MAX
+	int "Maximum undo character queue size"
+	default 256
+	range 32 65536
+	depends on FEATURE_VI_UNDO_QUEUE
+	help
+	This option sets the number of bytes used at runtime for the queue.
+	Smaller values will create more undo objects and reduce the amount
+	of typed or backspaced characters that are grouped into one undo
+	operation; larger values increase the potential size of each undo
+	and will generally malloc() larger objects and less frequently.
+	Unless you want more (or less) frequent "undo points" while typing,
+	you should probably leave this unchanged.
+
+config FEATURE_KILL_DELAY
+	int "How long to wait between TERM and KILL (0 - send TERM only)" if FEATURE_KILL_REMOVED
+	range 0 1024
+	default 0
+	depends on FEATURE_KILL_REMOVED
+	help
+	With nonzero setting, init sends TERM, forks, child waits N
+	seconds, sends KILL and exits. Setting it too high is unwise
+	(child will hang around for too long and could actually kill
+	the wrong process!)
+
+config LAST_ID
+	int "Last valid uid or gid for adduser and addgroup"
+	depends on ADDUSER || ADDGROUP
+	default 60000
+	help
+	Last valid uid or gid for adduser and addgroup
+
+config FIRST_SYSTEM_ID
+	int "First valid system uid or gid for adduser and addgroup"
+	depends on ADDUSER || ADDGROUP
+	range 0 LAST_ID
+	default 100
+	help
+	First valid system uid or gid for adduser and addgroup
+
+config LAST_SYSTEM_ID
+	int "Last valid system uid or gid for adduser and addgroup"
+	depends on ADDUSER || ADDGROUP
+	range FIRST_SYSTEM_ID LAST_ID
+	default 999
+	help
+	Last valid system uid or gid for adduser and addgroup
+
+config FEATURE_BEEP_FREQ
+	int "default frequency"
+	range 20 50000	# allowing 0 here breaks the build
+	default 4000
+	depends on BEEP
+	help
+	Frequency for default beep.
+
+config FEATURE_BEEP_LENGTH_MS
+	int "default length"
+	range 0 2147483647
+	default 30
+	depends on BEEP
+	help
+	Length in ms for default beep.
+
+config FEATURE_LESS_MAXLINES
+	int "Max number of input lines less will try to eat"
+	default 9999999
+	depends on LESS
+
+config FEATURE_SYSLOGD_READ_BUFFER_SIZE
+	int "Read buffer size in bytes"
+	default 256
+	range 256 20000
+	depends on SYSLOGD
+	help
+	This option sets the size of the syslog read buffer.
+	Actual memory usage increases around five times the
+	change done here.
+
+config FEATURE_IPC_SYSLOG_BUFFER_SIZE
+	int "Circular buffer size in Kbytes (minimum 4KB)"
+	default 16
+	range 4 2147483647
+	depends on FEATURE_IPC_SYSLOG
+	help
+	This option sets the size of the circular buffer
+	used to record system log messages.

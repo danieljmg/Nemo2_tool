@@ -1,0 +1,41 @@
+features
+	v0
+		optional
+			v1
+			v2
+			v3
+			v4
+			v5
+			v6
+			v7
+			v8
+			v9
+			v10
+			IPCG
+			CGS
+			REDAMG
+			IPAMG
+			Jac
+			Smoother
+			GS
+			GSAC
+			RBGS
+			RBGSAC
+			BS
+constraints
+	!v4
+	!v8
+	(CGS | !(IPCG))
+	(CGS | !(REDAMG))
+	(CGS | !(IPAMG))
+	(Smoother | !(Jac))
+	(Smoother | !(GS))
+	(Smoother | !(GSAC))
+	(Smoother | !(RBGS))
+	(Smoother | !(RBGSAC))
+	(Smoother | !(BS))
+	!(!((v1 <=>v5 | !v2 <=>(v6 <=>!v5) | !v3 <=>(v7 <=>!((v5 | v6))) | !v4 <=>(v8 <=>!((v7 | (v5 | v6)))))))
+	(!v3 | (!v2 | v1))
+	(!v4 | (!v3 | (!v2 | v1)))
+	(!v7 | (!v6 | !v5))
+	(!v8 | (!v7 | (!v6 | !v5)))

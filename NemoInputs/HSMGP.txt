@@ -1,0 +1,24 @@
+def CGS bool 0
+def IPCG bool 0
+def REDAMG bool 0
+def IPAMG bool 0
+def Smoother bool 0
+def Jac bool 0
+def GS bool 0
+def GSAC bool 0
+def RBGS bool 0
+def RBGSAC bool 0
+def BS bool 0
+def PreSmoothing [:6]
+def PostSmoothing [:6]
+def Cores [:3]
+ct IPCG -> CGS
+ct REDAMG -> CGS
+ct IPAMG -> CGS
+ct Jac -> Smoother
+ct GS -> Smoother
+ct GSAC -> Smoother
+ct RBGS -> Smoother
+ct RBGSAC -> Smoother
+ct BS -> Smoother
+ct (PreSmoothing + PostSmoothing) > 0

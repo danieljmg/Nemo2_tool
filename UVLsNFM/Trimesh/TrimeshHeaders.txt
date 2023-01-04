@@ -1,0 +1,31 @@
+c 1 PreSmoothing_1
+c 2 PreSmoothing_2
+c 3 PreSmoothing_3
+c 4 PreSmoothing_4
+c 5 PreSmoothing_5
+c 6 PostSmoothing_1
+c 7 PostSmoothing_2
+c 8 PostSmoothing_3
+c 9 PostSmoothing_4
+c 10 PostSmoothing_5
+c 11 Alpha_1
+c 12 Alpha_2
+c 13 Alpha_3
+c 14 Alpha_4
+c 15 Alpha_5
+c 16 Alpha_6
+c 17 Beta_1
+c 18 Beta_2
+c 19 Beta_3
+c 20 Beta_4
+c 21 Beta_5
+c 22 Beta_6
+c 23 V boolean
+c 24 Cycle boolean
+c 25 F boolean
+c 26 Jacobi boolean
+c 27 Smoother boolean
+c 28 ColorGS boolean
+c 29 Line boolean
+c 30 ZebraLine boolean
+p cnf 30 21

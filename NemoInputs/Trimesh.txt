@@ -1,0 +1,22 @@
+def Cycle bool 0
+def V bool 0
+def F bool 0
+def RelaxParameter bool 0
+def Smoother bool 0
+def Jacobi bool 0
+def ColorGS bool 0
+def Line bool 0
+def ZebraLine bool 0
+def PreSmoothing [:8]
+def PostSmoothing [:8]
+def Alpha [:17]
+def Beta [:17]
+ct V -> Cycle
+ct F -> Cycle
+ct Jacobi -> Smoother
+ct ColorGS -> Smoother
+ct Line -> Smoother
+ct ZebraLine -> Smoother
+ct (PreSmoothing + PostSmoothing) > 0
+ct (Alpha + Beta) >= 17
+ct (Alpha + Beta) < 34

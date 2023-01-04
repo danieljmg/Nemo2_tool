@@ -1,0 +1,24 @@
+c 1 Blocksize_1
+c 2 Blocksize_2
+c 3 Blocksize_3
+c 4 Blocksize_4
+c 5 Blocksize_5
+c 6 Blocksize_6
+c 7 Padding_1
+c 8 Padding_2
+c 9 Padding_3
+c 10 Padding_4
+c 11 Padding_5
+c 12 Padding_6
+c 13 PixelPerThread_1
+c 14 PixelPerThread_2
+c 15 OpenCL boolean
+c 16 API boolean
+c 17 CUDA boolean
+c 18 Linear1D boolean
+c 19 TextureMemory boolean
+c 20 Linear2D boolean
+c 21 Ldg boolean
+c 22 Array2D boolean
+c 23 LocalMemory boolean
+p cnf 23 16

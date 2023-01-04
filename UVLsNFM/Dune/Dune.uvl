@@ -1,0 +1,34 @@
+features
+	v0
+		optional
+			v1
+			v2
+			v3
+			v4
+			v5
+			v6
+			v7
+			v8
+			v9
+			SeqGs
+			Precon
+			SeqSOR
+			CGSolver
+			Solver
+			BiCGSTABSolver
+			LoopSolver
+			GradientSolver
+constraints
+	!v4
+	!v8
+	(Precon | !(SeqGs))
+	(Precon | !(SeqSOR))
+	(Solver | !(CGSolver))
+	(Solver | !(BiCGSTABSolver))
+	(Solver | !(LoopSolver))
+	(Solver | !(GradientSolver))
+	!(!((v1 <=>v5 | !v2 <=>(v6 <=>!v5) | !v3 <=>(v7 <=>!((v5 | v6))) | !v4 <=>(v8 <=>!((v7 | (v5 | v6)))))))
+	(!v3 | (!v2 | v1))
+	(!v4 | (!v3 | (!v2 | v1)))
+	(!v7 | (!v6 | !v5))
+	(!v8 | (!v7 | (!v6 | !v5)))

@@ -1,0 +1,93 @@
+config CONFIG_SSL_EXPIRY_TIME
+    int "Session expiry time (in hours)"
+    depends on !CONFIG_SSL_SKELETON_MODE
+    default 24 
+    help
+        The time (in hours) before a session expires. 
+        
+        A longer time means that the expensive parts of a handshake don't 
+        need to be run when a client reconnects later.
+
+        The default is 1 day.
+
+config CONFIG_X509_MAX_CA_CERTS
+    int "Maximum number of certificate authorites"
+    default 150
+    depends on !CONFIG_SSL_SERVER_ONLY && !CONFIG_SSL_SKELETON_MODE
+    help
+        Determines the number of CA's allowed. 
+
+        Increase this figure if more trusted sites are allowed. Each
+        certificate adds about 300 bytes (when added).
+
+        The default is to allow the Debian cert bundle to be parsed.
+
+config CONFIG_SSL_MAX_CERTS
+    int "Maximum number of chained certificates"
+    default 3
+    help
+        Determines the number of certificates used in a certificate
+        chain. The chain length must be at least 1.
+
+        Increase this figure if more certificates are to be added to the 
+        chain. Each certificate adds about 300 bytes (when added).
+
+        The default is to allow one certificate + 2 certificates in the chain.
+
+config CONFIG_HTTP_PORT
+    int "HTTP port"
+    default 80
+    help
+        The port number of the normal HTTP server. 
+
+        You must be a root user in order to use the default port.
+
+config CONFIG_HTTP_HTTPS_PORT
+    int "HTTPS port"
+    default 443
+    help
+        The port number of the HTTPS server.
+
+        You must be a root user in order to use the default port.
+
+config CONFIG_HTTP_SESSION_CACHE_SIZE
+    int "SSL session cache size"
+    default 5
+    help
+        The size of the SSL session cache.
+        
+        This is not actually related to the number of concurrent users, but 
+        for optimum performance they should be the same (with a penalty 
+        in memory usage).
+
+config CONFIG_HTTP_TIMEOUT
+    int "Timeout"
+    default 300
+    help
+        Set the timeout of a connection in seconds.
+
+config MUL_KARATSUBA_THRESH
+    int "Karatsuba Multiplication Theshold"
+    default 20
+    depends on CONFIG_BIGINT_KARATSUBA
+    help
+        The minimum number of components needed before Karasuba muliplication
+        is used.
+ 
+        This is very dependent on the speed/implementation of bi_add()/
+        bi_subtract(). There is a bit of trial and error here and will be
+        at a different point for different architectures.
+
+config SQU_KARATSUBA_THRESH
+    int "Karatsuba Square Threshold"
+    default 40
+    depends on CONFIG_BIGINT_KARATSUBA && CONFIG_BIGINT_SQUARE
+    help    
+        The minimum number of components needed before Karatsuba squaring
+        is used.
+ 
+        This is very dependent on the speed/implementation of bi_add()/
+        bi_subtract(). There is a bit of trial and error here and will be
+        at a different point for different architectures.
+
+

@@ -1,0 +1,18 @@
+def Precon bool 0
+def Solver bool 0
+def SeqGs bool 0
+def SeqSOR bool 0
+def CGSolver bool 0
+def BiCGSTABSolver bool 0
+def LoopSolver bool 0
+def GradientSolver bool 0
+def Pre [:6]
+def Post [:6]
+def Cells [:1]
+ct SeqGs -> Precon
+ct SeqSOR -> Precon
+ct CGSolver -> Solver
+ct BiCGSTABSolver -> Solver
+ct LoopSolver -> Solver
+ct GradientSolver -> Solver
+ct (Pre + Post) > 0

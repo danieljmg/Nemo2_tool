@@ -1,0 +1,102 @@
+namespace MOTIV
+
+features
+	Sequence {abstract}	
+		mandatory
+			Scene	
+				mandatory
+					Background	
+						alternative
+							Urban
+							Jungle
+							Countryside
+							Forest
+							Dessert
+
+				optional
+					Objects	
+						or
+							Targets	
+								or
+									Humans
+									Vehicles
+							Distractors	
+								or
+									Buterflies
+									Birds
+									Vegetation
+									Light	
+										or
+											BlinkingLight
+											ReflectionLigh
+							Ocultants	
+								or
+									SolidOcultant
+									TransparentOcultant
+			CapturingConditions	
+				mandatory
+					Camera	
+						or
+							Vibration
+							FocalDistorsion
+							PanDistorsion
+							TiltMotion
+
+				optional
+					CaptureEffects	
+						or
+							Shadow
+							GlobalLight
+							LocalLight
+							HeatHaze
+			SignalQuality	
+				mandatory
+					Size	
+						alternative
+							QVGA
+							VGA
+							HD
+							FHD
+
+				optional
+					Distorsions	
+						or
+							Compresion
+							LineInestability
+							Blur
+							Parasitics
+							Noise	
+								or
+									Static
+									Dinamic
+							FrameInestability
+
+		optional
+			TargetsNumberOf
+			TargetsMotion
+			TargetsShadowed
+			TargetsDistance
+			VehiclesDust
+			DistractorsLevel
+			OcultantsLevel
+			CapturingConditionsLevel
+			SignalQualityLuminance
+			SignalQualityChrominance
+			SizeWidth
+			SizeHeight
+			DistorsionsLevel
+
+constraints
+	Targets <=> TargetsNumberOf
+	Targets <=> TargetsMotion
+	Targets <=> TargetsShadowed
+	Targets <=> TargetsDistance
+	Vehicles <=> VehiclesDust
+	Distractors <=> DistractorsLevel
+	Ocultants <=> OcultantsLevel
+	CapturingConditions <=> CapturingConditionsLevel
+	SignalQuality <=> SignalQualityLuminance
+	SignalQuality <=> SignalQualityChrominance
+	Size <=> SizeWidth
+	Size <=> SizeHeight
+	Distorsions <=> DistorsionsLevel

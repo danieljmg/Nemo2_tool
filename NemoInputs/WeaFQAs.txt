@@ -1,0 +1,5 @@
+def KeySize [:11]
+def MaxSizeCache [:1024]
+def MaxLifeSeconds [:2147483647]
+def PasswordLength [:31]
+def BatteryStatus [:100]

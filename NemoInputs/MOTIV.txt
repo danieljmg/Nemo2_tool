@@ -1,0 +1,107 @@
+def TargetsNumberOf [:100]
+def TargetsMotion [:200]
+def TargetsShadowed [:100]
+def TargetsDistance [:100]
+def VehiclesDust [:100]
+def DistractorsLevel [:100]
+def OcultantsLevel [:100]
+def CapturingConditionsLevel [:100]
+def SignalQualityLuminance [:100]
+def SignalQualityChrominance [:100]
+def SizeWidth [:2048]
+def SizeHeight [:1080]
+def DistorsionsLevel [:100]
+def Dessert bool 200
+def Urban bool 201
+def Jungle bool 202
+def Forest bool 203
+def QVGA bool 204
+def VGA bool 205
+def HD bool 206
+def FHD bool 207
+ct Dessert -> (VehiclesDust > 50)
+ct Dessert -> (DistractorsLevel < 30)
+ct Urban -> (TargetsNumberOf > 50)
+ct Jungle -> (DistractorsLevel > 75)
+ct Forest -> (DistractorsLevel > 40)
+ct QVGA -> (SizeWidth == 320)
+ct QVGA -> (SizeHeight == 240)
+ct VGA -> (SizeWidth == 640)
+ct VGA -> (SizeHeight == 480)
+ct HD -> (SizeWidth == 1280)
+ct HD -> (SizeHeight == 720)
+ct FHD -> (SizeWidth == 1920)
+ct FHD -> (SizeHeight == 1080)
+
+
+-------
+from z3 import *
+def embeed(constraints):
+    TargetsNumberOf = BitVec('TargetsNumberOf', 7)
+    TargetsMotion = BitVec('TargetsMotion', 8)
+    TargetsShadowed = BitVec('TargetsShadowed', 7)
+    TargetsDistance = BitVec('TargetsDistance', 7)
+    VehiclesDust = BitVec('VehiclesDust', 7)
+    DistractorsLevel = BitVec('DistractorsLevel', 7)
+    OcultantsLevel = BitVec('OcultantsLevel', 7)
+    CapturingConditionsLevel = BitVec('CapturingConditionsLevel', 7)
+    SignalQualityLuminance = BitVec('SignalQualityLuminance', 7)
+    SignalQualityChrominance = BitVec('SignalQualityChrominance', 7)
+    SizeWidth = BitVec('SizeWidth', 12)
+    SizeHeight = BitVec('SizeHeight', 11)
+    DistorsionsLevel = BitVec('DistorsionsLevel', 7)
+    Dessert = Bool('Dessert')
+    Urban = Bool('Urban')
+    Jungle = Bool('Jungle')
+    Forest = Bool('Forest')
+    QVGA = Bool('QVGA')
+    VGA = Bool('VGA')
+    HD = Bool('HD')
+    FHD = Bool('FHD')
+    constraints.add(ULT(TargetsNumberOf, 101))
+    constraints.add(ULT(TargetsMotion, 201))
+    constraints.add(ULT(TargetsShadowed, 101))
+    constraints.add(ULT(TargetsDistance, 101))
+    constraints.add(ULT(VehiclesDust, 101))
+    constraints.add(ULT(DistractorsLevel, 101))
+    constraints.add(ULT(OcultantsLevel, 101))
+    constraints.add(ULT(CapturingConditionsLevel, 101))
+    constraints.add(ULT(SignalQualityLuminance, 101))
+    constraints.add(ULT(SignalQualityChrominance, 101))
+    constraints.add(ULT(SizeWidth, 2049))
+    constraints.add(ULT(SizeHeight, 1081))
+    constraints.add(ULT(DistorsionsLevel, 101))
+    constraints.add(Implies(Dessert, UGT(VehiclesDust, 50)))
+    constraints.add(Implies(Dessert, ULT(DistractorsLevel, 30)))
+    constraints.add(Implies(Urban, UGT(TargetsNumberOf, 50)))
+    constraints.add(Implies(Jungle, UGT(DistractorsLevel, 75)))
+    constraints.add(Implies(Forest, UGT(DistractorsLevel, 40)))
+    constraints.add(Implies(QVGA, (SizeWidth == 320)))
+    constraints.add(Implies(QVGA, (SizeHeight == 240)))
+    constraints.add(Implies(VGA, (SizeWidth == 640)))
+    constraints.add(Implies(VGA, (SizeHeight == 480)))
+    constraints.add(Implies(HD, (SizeWidth == 1280)))
+    constraints.add(Implies(HD, (SizeHeight == 720)))
+    constraints.add(Implies(FHD, (SizeWidth == 1920)))
+    constraints.add(Implies(FHD, (SizeHeight == 1080)))
+
+-----------
+ ##### Start generating the dynamic Z3 python module #####
+    auxf = open("auxdefs.py", "w+")
+    auxf.write("from z3 import *\n")
+    auxf.write("def embeed(constraints):")
+    ##### Dynamically define NFM variables in Z3py format #####
+    for file_var in file_vars:
+        if file_var[2] == 'boolean':
+            auxf.write(f"\n    {file_var[0]} = Bool('{file_var[0]}')")
+        elif 'constant_' in file_var[2]:
+            constant_value = str(file_var[2]).split('_')[1]
+            auxf.write(f"\n    {file_var[0]} = BitVecVal({constant_value}, {file_var[1]})")
+        else:
+            auxf.write(f"\n    {file_var[0]} = BitVec('{file_var[0]}', {file_var[1]})")
+
+    ##### Dynamically define NFM constraints in Z3py format #####
+    for file_ct in file_cts:
+        auxf.write(f"\n    constraints.add({file_ct})")
+    ##### Close the file and execute the dinamically generated code #####
+    auxf.close()

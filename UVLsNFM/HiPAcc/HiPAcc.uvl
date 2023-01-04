@@ -1,0 +1,43 @@
+features
+	v0
+		optional
+			v1
+			v2
+			v3
+			v4
+			v5
+			v6
+			v7
+			v8
+			v9
+			v10
+			v11
+			v12
+			OpenCL
+			API
+			CUDA
+			Linear1D
+			TextureMemory
+			Linear2D
+			Ldg
+			Array2D
+			v13
+			v14
+			LocalMemory
+constraints
+	!v6
+	!v12
+	(API | !(OpenCL))
+	(API | !(CUDA))
+	(TextureMemory | !(Linear1D))
+	(TextureMemory | !(Linear2D))
+	(TextureMemory | !(Ldg))
+	(TextureMemory | !(Array2D))
+	(!(OpenCL) | And(!(Linear1D) | !(Linear2D) | !(Ldg)))
+	(!(Array2D) | !((v7 | v8 | v9 | v10 | v11 | v12)))
+	(!(LocalMemory) | !(And((!((v2 | v4 | v5 | v6 | !v3 | v1)) | !((v1 | v3 | v5 | v6 | !v2 | !v4)) | !((v1 | v5 | v6 | !v3 | !v2 | !v4)) | !((v2 | v3 | v4 | v6 | !v5 | v1)) | !((v3 | v4 | v6 | !v2 | !v5 | v1))) | !((!v13 | !v14)))))
+	(!(LocalMemory) | !(And(!((v1 | v2 | v4 | v6 | !v3 | !v5)) | (!((v14 | !v13)) | !((v13 | !v14)) | !((!v13 | !v14))))))
+	(!v5 | !((v4 | !((!v3 | !v2)) | !((!v4 | (!v3 | !v2))))))
+	(!v6 | (!v5 | !((v4 | !((!v3 | !v2)) | !((!v4 | (!v3 | !v2)))))))
+	(!v11 | !((v10 | (v9 | (v7 | v8 | !((!v8 | !v7))) | !((!v9 | !((v7 | v8 | !((!v8 | !v7))))))) | !((!v10 | !((v9 | (v7 | v8 | !((!v8 | !v7))) | !((!v9 | !((v7 | v8 | !((!v8 | !v7)))))))))))))
+	(!v12 | (!v11 | !((v10 | (v9 | (v7 | v8 | !((!v8 | !v7))) | !((!v9 | !((v7 | v8 | !((!v8 | !v7))))))) | !((!v10 | !((v9 | (v7 | v8 | !((!v8 | !v7))) | !((!v9 | !((v7 | v8 | !((!v8 | !v7))))))))))))))

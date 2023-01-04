@@ -1,0 +1,18 @@
+c 1 Pre_1
+c 2 Pre_2
+c 3 Pre_3
+c 4 Pre_4
+c 5 Post_1
+c 6 Post_2
+c 7 Post_3
+c 8 Post_4
+c 9 Cells_1
+c 10 SeqGs boolean
+c 11 Precon boolean
+c 12 SeqSOR boolean
+c 13 CGSolver boolean
+c 14 Solver boolean
+c 15 BiCGSTABSolver boolean
+c 16 LoopSolver boolean
+c 17 GradientSolver boolean
+p cnf 17 13
