@@ -50,7 +50,7 @@ As one image is worth a thousand words, the following extended example shows mos
 `ct  A or B`  
 `ct (G_enum_signed*H_constant) ≤ E_unsigned`
 
-Real world models pre and post transformation are to be found in the examples folder.
+Real world models pre and post transformation, as well as the proper Nemo2 inputs, are to be found in their respective folders in this github page.
 
 
 
