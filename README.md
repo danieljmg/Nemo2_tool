@@ -124,4 +124,4 @@ It must produce 54 different valid solutions.
    
 ## Credits
 
-Besides common Python modules, Nemo makes use of the tactics functionality of a local compilation of [Z3py 4.8.8](https://github.com/Z3Prover/z3/issues/2775), as means to base its transformations in a solid library. Tactics is a side functionality, do not confuse it with the Z3 SMT solver. Additional corrections and pre-processing optimizations are encoded aside the library; any Z3py modification had occurred and all credits and issues are referred to [its github page](https://github.com/Z3Prover/z3). 
+Besides common Python modules, Nemo makes use of the tactics functionality of [Z3py](https://github.com/Z3Prover), as means to base its transformations in a solid library. Tactics is a side functionality, do not confuse it with the Z3 SMT solver. Additional corrections and pre-processing optimizations are encoded aside the library; any Z3py modification had occurred and all credits and issues are referred to [its github page](https://github.com/Z3Prover/z3). 
