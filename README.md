@@ -44,8 +44,8 @@ As one image is worth a thousand words, the following extended example shows mos
 `def E_unsigned [0:3]`  
 `def F_signed [-1:1]`  
 `def G_enum_signed [-9, -3, 0, 3]`  
-`def H_constant [-2]`
-`ct  C -> B`
+`def H_constant [-2]`  
+`ct  C -> B`  
 `ct  A -> (G = 0)`  
 `ct  A or B`  
 `ct (G_enum_signed*H_constant) ≤ E_unsigned`
