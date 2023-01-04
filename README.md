@@ -6,16 +6,21 @@ Nemo2 is a boolean and numerical constraint language and tool with first-class s
 
 It is licensed under the [MIT license](https://github.com/danieljmg/Nemo2_tool/blob/master/LICENSE.txt).
 
+For Nemo version 1, we refer stakeholders to its repository: https://github.com/danieljmg/Nemo_tool
 
 
 ## At a glance
 
-The current version of Nemo transforms ***Numerical Feature Models*** (NFMs) into: a) an optimized Tseitin’s *Conjunctive Normal Form* (CNF) **propositional formula** by means of Bit-Blasting. Nemo is a cross-platform tool that have been developed in Python.
+Nemo2 support extending classic variability models with numerical features and arithmetic in the formats [**DIMACS**](https://logic.pdmi.ras.ru/~basolver/dimacs.html) and Universal Variability Language [**(UVL)**](https://leopard.tu-braunschweig.de/servlets/MCRFileNodeServlet/dbbs_derivate_00047673/Engelhardt_Thesis.pdf) 
 
-The input NFM must be specified using Nemo's modeling language in a *.txt* file.
+***Numerical Feature Models*** (NFMs) must be defined in Nemo2 by using Nemo's modeling language in a *.txt* file.
 
-The output is a [**DIMACS**](https://logic.pdmi.ras.ru/~basolver/dimacs.html) file. We make use of the comment lines 'c' to identify each feature and bit-blasted features and their original type -- boolean or numerical. DIMACS is SAT-based solvers ready format, including **#SATs** (i.e., **Model Counting**).
+Nemo2 transforms and optimize NFMs by means of Bit-Blasting into classic variability models which then are supported by any first-order logic reasoner.
 
+Nemo2 outputs support three formats: a) a UVL model, b) a **propositional formula**, and c) a Tseitin’s *Conjunctive Normal Form* (CNF) **propositional formula**. 
+Besides the transformed model, we make use of comment lines to identify each original feature name and domain (i.e., boolean or numerical) with their respectives bit-blasted features.
+
+Nemo2 is a cross-platform tool that have been developed in Python 11.x.
 
 
 ## Supported Definitions
@@ -30,18 +35,20 @@ The output is a [**DIMACS**](https://logic.pdmi.ras.ru/~basolver/dimacs.html) fi
 
 ## Modeling Language
 
-As one image is worth a thousand words, the following extended example shows most of the possibilities. It represents the model <*(G or F) and ((A * B) > C) requires (F or (E = D))*>
+As one image is worth a thousand words, the following extended example shows most of the possibilities.
 
-`def A_constant [3]`  
-`def B_natural [0:3] `  
-`def C_natural_2 [:3]`  
-`def D_integer [ -2:1]`  
-`def E_enumerated_integer [-1, 2, 4, 8]`  
-`def F_new_boolean bool 0 `  
-`def G_predifined_boolean bool 23`  
-`ct G_predifined_boolean or F_new_boolean`  
-`ct (( A_constant * B_natural ) > C_natural ) ->`  
-`( F_new_boolean Or ( E_enumerated_integer == D_integer ))`
+`def A bool 0    # 0 means new feature`  
+`def B bool f8   # named in adjunt FM as f8`  
+`def C bool 0`  
+`def D_unsigned [0:1]`  
+`def E_unsigned [0:3]`  
+`def F_signed [-1:1]`  
+`def G_enum_signed [-9, -3, 0, 3]`  
+`def H_constant [-2]`
+`ct  C -> B`
+`ct  A -> (G = 0)`  
+`ct  A or B`  
+`ct (G_enum_signed*H_constant) ≤ E_unsigned`
 
 Real world models pre and post transformation are to be found in the examples folder.
 
@@ -49,7 +56,7 @@ Real world models pre and post transformation are to be found in the examples fo
 
 ## Installation
 
-Nemo has been tested in Python 3.8.1 x86_64 at the moment, with up-to-date libraries (`pycosat`, `files`,  `re` and `z3py` modules must be installed). 
+Nemo has been tested in Python 3.11 x86_64 at the moment, with up-to-date libraries (`pycosat`, `files`,  `re` and `z3py` modules must be installed). 
 
 To install pycosat in windows:
 
@@ -72,11 +79,11 @@ Run `main.py`
 
 You will be asked:
 
-1. *Do you want to run the model in the Z3 SMT solver?* Answer `y` to run the model in the Z3 SMT solver. The enumerated generated solutions are written in the *smtsolutions.txt* file.
-2. *Do you want to transform the model into DIMACS?* Answer `y` to transform the model into a Tseitin's CNF proposional formula in DIMACS format by means of bit-blasting.
+1. *Do you want to run the model in the Z3 SMT solver (y)?* Answer `y` to run the model in the Z3 SMT solver. The enumerated generated solutions are written in the *smtsolutions.txt* file.
+2. *Do you want to transform the model into UVL (uvl), classic PF (pf), or Tseitin DIMACS (td)?* The three options bit-blast the mode. Answer `uvl` to transform it into a UVL with .uvl extension. Answer `pf` to transform it into a classic proposional formula with .txt extension. Answer `td` to transform it into a Tseitin's CNF proposional formula with .dimacs extension.
    1. *Which is the model .txt to transform?* You must write the path/name of the *.txt* file. If in the same folder, just the name is necessary.
    2. *If you are extending a DIMACS model, please write its name, BLANK otherwise*. You must write the path/name of the *.dimacs* file to evolve. If in the same folder, just the name is necessary. If you are not evolving, press Enter.
-   3. The transformed model is available in the *transformedmodel.dimacs* file.
+   3. The transformed model is available in the *transformedmodel.{uvl/txt/dimacs}* file.
 
 At all cases, in the terminal are presented:
 
@@ -115,7 +122,6 @@ It must produce 54 different valid solutions.
 
 
    
-
 ## Credits
 
 Besides common Python modules, Nemo makes use of the tactics functionality of a local compilation of [Z3py 4.8.8](https://github.com/Z3Prover/z3/issues/2775), as means to base its transformations in a solid library. Tactics is a side functionality, do not confuse it with the Z3 SMT solver. Additional corrections and pre-processing optimizations are encoded aside the library; any Z3py modification had occurred and all credits and issues are referred to [its github page](https://github.com/Z3Prover/z3). 
