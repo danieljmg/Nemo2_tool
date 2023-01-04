@@ -1,4 +1,4 @@
-![NEMO_LOGO](https://i.ibb.co/jW4JLDL/nemo.png)
+![NEMO2_LOGO](https://raw.githubusercontent.com/danieljmg/Nemo2_tool/main/nemo2logo.png)
 
 # Nemo2 (Numbers, fEatures, MOdels, version 2)
 
