@@ -20,7 +20,7 @@ Nemo2 transforms and optimize NFMs by means of Bit-Blasting into classic variabi
 Nemo2 outputs support three formats: a) a UVL model, b) a **propositional formula**, and c) a Tseitin’s *Conjunctive Normal Form* (CNF) **propositional formula**. 
 Besides the transformed model, we make use of comment lines to identify each original feature name and domain (i.e., boolean or numerical) with their respectives bit-blasted features.
 
-Nemo2 is a cross-platform tool that have been developed in Python 11.x.
+Nemo2 is a cross-platform tool that have been developed in Python 3.11.x.
 
 
 ## Supported Definitions
